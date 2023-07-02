@@ -23,7 +23,6 @@ Technologies Used:
 - Express.js: Web application framework for handling HTTP requests and routing.
 - MySQL: Relational database management system for storing customer and product data.
 - Nodemailer: Library for sending emails to customers.
-
 - dotenv: Library for managing environment variables.
 
 3.Database:
@@ -51,7 +50,7 @@ Navigate to the backend with command :
 ```
 cd backted
 npm install
-npm start
+node app.js
 ```
 5.Set up the MySQL database by executing the necessary SQL scripts (provided in the project).
 
