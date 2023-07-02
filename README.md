@@ -32,7 +32,7 @@ MySQL: Relational database management system for storing customer and product da
 4.Setup and Installation
 Clone the repository from GitHub.
 ```
-git clone https://github.com/Rkvishnu/react-express-customer-details-app/tree/master
+git clone https://github.com/Rkvishnu/react-express-customer-details-app.git 
 ```
 
 go to root directory:
