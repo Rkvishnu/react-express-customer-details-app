@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'user_db',
+  database: 'demo_db',
 });
 
 // Error handling
@@ -26,12 +26,15 @@ connection.connect((err) => {
 const app = express();
 
 // Configure Nodemailer
+let testAccount = await nodemailer.createTestAccount();
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  host: 'smtp.ethereal.email',
+  port: 587,
+  secure: false,
   auth: {
-    user: 'vishnu.eps91@gmail.com',
-    pass: process.env.EMAIL_PASS,
-  },
+    user: testAccount.user,
+    pass: testAccount.pass,
+  }
 });
 
 app.use(express.json());
@@ -42,8 +45,7 @@ app.post('/api/order', (req, res) => {
   const { name, email, address, paymentMethod } = req.body;
 
   // Saving the customer details in the database
-  const query =
-    'INSERT INTO customers (name, email, address, payment_method) VALUES (?, ?, ?, ?)';
+  const query = "INSERT INTO users (`name`, `email`, `address`, `payment_method`) VALUES (?,?,?,?)";
   const values = [name, email, address, paymentMethod];
 
   connection.query(query, values, (error, results) => {
@@ -57,8 +59,8 @@ app.post('/api/order', (req, res) => {
       console.log('Customer details saved successfully');
 
       // Sending the email confirmation to the customer's email address
-      const mailData = {
-        from: 'vishnu.eps91@gmail.com',
+      let mailData = {
+        from: ' "Vishnu  Rathore" <vishnubhn583@gmail.com>',
         to: email,
         subject: 'Order Confirmation',
         text: 'Thank you for your order!',
@@ -66,18 +68,19 @@ app.post('/api/order', (req, res) => {
 
       transporter.sendMail(mailData, (error, info) => {
         if (error) {
-          console.error('Error sending email:', error);
+          console.log('Error sending email:', error.message);
           res.status(500).json({ error: 'Failed to send email' });
         } else {
-          console.log('Email sent successfully');
-          res.json({ message: 'Order placed successfully' });
+          console.log('Email sent successfully',info.messageId);
+          return res.json({ message: 'Order placed successfully', });
         }
       });
+
     }
   });
 });
 
-const PORT = process.env.PORT || 3301;
+const PORT = 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
