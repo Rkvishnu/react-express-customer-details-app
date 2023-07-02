@@ -52,16 +52,15 @@ npm start
 Navigate to the backend with command :
 
 ```
-cd backted
+cd backend
 npm install
 node app.js
 ```
-5.Set up the MySQL database by executing the necessary SQL scripts (provided in the project).
+5. open xampp server -->mysql service
 
+6.Set up the MySQL database by executing the necessary SQL scripts (provided in the project).
 
-6.Update the database connection configuration in the backend code to match your MySQL database settings.
-
- 
+7.Update the database connection configuration in the backend code to match your MySQL database settings.
 
 Access the website in your browser at http://localhost:3000.
 
