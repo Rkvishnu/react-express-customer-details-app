@@ -1,6 +1,6 @@
  About:
 
- A full stack application that take the customer details and  store the user's details in a relational database and send an email to the user confirming the placement of the order
+ A full stack application that take the customer details and  store the user's details in a relational database MySQL and send an email to the user confirming the placement of the order.
 
 
 Features:
